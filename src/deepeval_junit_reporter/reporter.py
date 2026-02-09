@@ -6,6 +6,8 @@ used without deepeval in the same process. assert_test_with_junit_report
 requires deepeval and is a drop-in wrapper around assert_test.
 """
 
+from __future__ import annotations
+
 import inspect
 import time
 import xml.etree.ElementTree as ET

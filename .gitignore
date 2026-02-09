@@ -1,0 +1,7 @@
+.idea
+.deepeval
+.venv
+*.xml
+__pycache__
+test_reports/
+.env

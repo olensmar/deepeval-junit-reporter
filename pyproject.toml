@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 dependencies = ["deepeval"]
 license = { text = "MIT" }
-authors = [{ name = "Your Name", email = "you@example.com" }]
+authors = [{ name = "Ole Lensmar", email = "ole@lensmar.com" }]
 keywords = ["deepeval", "junit", "xml", "testing", "reporting"]
 classifiers = [
     "Development Status :: 3 - Alpha",

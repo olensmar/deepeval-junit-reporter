@@ -1,3 +1,25 @@
+Metadata-Version: 2.4
+Name: deepeval-junit-reporter
+Version: 0.1.0
+Summary: JUnit-style XML report generation for deepeval test runs (reusable across projects)
+Author-email: Your Name <you@example.com>
+License: MIT
+Keywords: deepeval,junit,xml,testing,reporting
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Testing
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: deepeval
+Provides-Extra: dev
+Requires-Dist: pytest>=7; extra == "dev"
+
 # deepeval-junit-reporter
 
 JUnit-style XML report generation for [deepeval](https://github.com/confident-ai/deepeval) test runs. Reusable across projects so CI and reporting tools (Jenkins, GitLab CI, Azure Pipelines, etc.) can consume the same format.
@@ -51,48 +73,6 @@ The test name in the XML is inferred from the calling function (`test_example`).
 
 - **`write_junit_xml(metrics, test_case, test_name, duration_seconds, output_path, assertion_error=None)`**  
   Writes a single JUnit XML file. Use when you need full control over timing and error handling. Returns the resolved `output_path`. Uses duck typing for `test_case` and `metrics` (compatible with deepeval's `LLMTestCase` and metric types).
-
-## Running the Example
-
-The repo includes `test_chatbot.py`, a minimal example that evaluates a chatbot response using deepeval's `GEval` metric and writes a JUnit XML report.
-
-### Prerequisites
-
-- Python ≥ 3.9
-- An `OPENAI_API_KEY` environment variable (used by deepeval's LLM-based evaluation)
-
-### Steps
-
-1. **Clone the repo and install in editable mode:**
-
-   ```bash
-   git clone <repo-url> && cd deepeval-junit-reporter
-   pip install -e .
-   ```
-
-2. **Set your OpenAI API key** (or add it to a `.env` file):
-
-   ```bash
-   export OPENAI_API_KEY="sk-..."
-   ```
-
-3. **Run the example with deepeval:**
-
-   ```bash
-   deepeval test run test_chatbot.py
-   ```
-
-   This will:
-   - Evaluate the test case using the `GEval` correctness metric.
-   - Write a JUnit XML report to `test_reports/deepeval_results.xml`.
-
-4. **View the report:**
-
-   ```bash
-   cat test_reports/deepeval_results.xml
-   ```
-
-The example uses `assert_test_with_junit_report` as a drop-in replacement for deepeval's `assert_test`, so the JUnit report is generated automatically alongside the normal deepeval output.
 
 ## Requirements
 
