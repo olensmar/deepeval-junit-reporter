@@ -1,4 +1,0 @@
-deepeval
-
-[dev]
-pytest>=7

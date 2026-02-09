@@ -1,9 +1,0 @@
-README.md
-pyproject.toml
-src/deepeval_junit_reporter/__init__.py
-src/deepeval_junit_reporter/reporter.py
-src/deepeval_junit_reporter.egg-info/PKG-INFO
-src/deepeval_junit_reporter.egg-info/SOURCES.txt
-src/deepeval_junit_reporter.egg-info/dependency_links.txt
-src/deepeval_junit_reporter.egg-info/requires.txt
-src/deepeval_junit_reporter.egg-info/top_level.txt
