@@ -101,6 +101,21 @@ def write_junit_xml(
         failure = ET.SubElement(testcase, "failure", message=msg)
         failure.text = str(assertion_error)
 
+    # Merge into existing file if it already contains a <testsuites> root,
+    # so multiple test functions can accumulate results in one report.
+    if output_path.exists():
+        try:
+            existing_tree = ET.parse(output_path)
+            root = existing_tree.getroot()
+            if root.tag == "testsuites":
+                root.append(testsuite)
+                ET.indent(existing_tree, space="  ", level=0)
+                with open(output_path, "wb") as f:
+                    existing_tree.write(f, encoding="utf-8", xml_declaration=True)
+                return output_path.resolve()
+        except ET.ParseError:
+            pass  # file is malformed – overwrite it below
+
     tree = ET.ElementTree(ET.Element("testsuites"))
     tree.getroot().append(testsuite)
     ET.indent(tree, space="  ", level=0)

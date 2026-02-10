@@ -42,6 +42,29 @@ def test_example():
 
 The test name in the XML is inferred from the calling function (`test_example`). Pass `test_name="..."` to override. Optional `verbose=False` disables the print of the report path.
 
+### Multiple tests writing to the same report
+
+When several test functions write to the same `output_path`, results are **accumulated** automatically. Each call appends a new `<testsuite>` element to the existing `<testsuites>` root in the XML file, so the final report contains results from every test.
+
+Because results accumulate across runs, **delete the report file before each full test run** to avoid stale results from previous runs:
+
+```bash
+rm -f test_reports/deepeval_results.xml
+deepeval test run test_chatbot.py
+```
+
+Alternatively, add a `conftest.py` fixture that cleans up the file at the start of the session:
+
+```python
+import pathlib, pytest
+
+REPORT_FILE = pathlib.Path("test_reports/deepeval_results.xml")
+
+@pytest.fixture(scope="session", autouse=True)
+def clean_junit_report():
+    REPORT_FILE.unlink(missing_ok=True)
+```
+
 **Custom flow:** call `write_junit_xml()` yourself after `assert_test()` if you need to handle timing or errors differently.
 
 ## API

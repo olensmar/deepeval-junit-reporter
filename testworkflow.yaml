@@ -1,0 +1,33 @@
+kind: TestWorkflow
+apiVersion: testworkflows.testkube.io/v1
+metadata:
+  name: deepeval-junit-reporter-test
+  namespace: testkube
+spec:
+  content:
+    git:
+      uri: https://github.com/olensmar/deepeval-junit-reporter
+  container:
+    workingDir: /data/repo
+    image: python:3.12.6-alpine3.20
+    env:
+    - name: OPENAI_API_KEY
+      value: '{{credential("OPENAI_API_KEY")}}'
+    resources:
+      requests:
+        cpu: 256m
+        memory: 256Mi
+  job:
+    activeDeadlineSeconds: 180
+  steps:
+  - name: Install dependencies
+    pure: true
+    shell: |
+      pip install --upgrade pip
+      pip install -U deepeval
+  - name: Run test
+    pure: true
+    shell: deepeval test run test_junitreport.py
+    artifacts:
+      paths:
+      - test_reports/*.xml
