@@ -7,3 +7,4 @@ test_reports/
 .env
 .pytest_cache/
 *.egg-info/
+deepeval-test.code-workspace

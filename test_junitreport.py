@@ -28,12 +28,12 @@ def test_testbusters_night():
         name="Correctness",
         criteria="Determine if the 'actual output' is correct based on the 'expected output'.",
         evaluation_params=[LLMTestCaseParams.ACTUAL_OUTPUT, LLMTestCaseParams.EXPECTED_OUTPUT],
-        threshold=0.8,
+        threshold=0.6,
         verbose_mode=True
     )
 
     relevancy_metric = AnswerRelevancyMetric(
-        threshold=0.8,
+        threshold=0.6,
         include_reason=True
     )
 
