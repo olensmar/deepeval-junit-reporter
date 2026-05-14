@@ -16,7 +16,7 @@ def test_testbusters_night():
     )
 
     relevancy_metric = AnswerRelevancyMetric(
-        threshold=0.6s,
+        threshold=0.6,
         include_reason=True
     )
 
